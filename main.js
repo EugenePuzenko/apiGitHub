@@ -83,7 +83,7 @@ function handleInput(e) {
       } else {
         return
       }
-    })
+    }, {once: true})
   })
 }
 
