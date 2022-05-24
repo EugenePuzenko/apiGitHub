@@ -5,6 +5,10 @@ const selectedItems = selectedList.children
 const autocompleteListItems = autocompleteList.children
 
 class Autocomplete {
+  constructor(data) {
+    this.data = data;
+  }
+
   showFirstFiveRepositories(repo){
     repo.forEach(function (repo) {
       let li = document.createElement('li')
@@ -69,24 +73,24 @@ function handleInput(e) {
   getRepo(e.target.value).then(data => {
     if (e.target.value != '') {
       autocompleteList.innerHTML = '';
+      autocomplete.data = data;
       autocomplete.showFirstFiveRepositories(data);
     }
-    
-    autocompleteList.addEventListener('click', foo = (e) => {
-      if (selectedItems.length < 3) {
-        for (let i = 0; i < autocompleteListItems.length; i++) {
-          if (autocompleteListItems[i].textContent === e.target.innerHTML) {
-            autocompleteList.innerHTML = '';
-            autocomplete.addToSelectedList(data[i])
-          }
-        }
-        autocompleteList.removeEventListener('click', foo) 
-      } else {
-        return
-      }
-    }, {once: true})
   })
 }
+
+autocompleteList.addEventListener('click', (e) => {
+  if (selectedItems.length < 3) {
+    for (let i = 0; i < autocompleteListItems.length; i++) {
+      if (autocomplete.data[i].name === e.target.innerHTML) {
+        autocomplete.addToSelectedList(autocomplete.data[i])
+        autocompleteList.innerHTML = '';
+      }
+    }
+  } else {
+    return
+  }
+})
 
 const debouncedhandle = debounce(handleInput, 300);
 
