@@ -21,15 +21,14 @@ class Autocomplete {
   
   addToSelectedList(data){
     const template = 
-    `<div class='selected-item'>
-      <div class='text-block'>
+    ` <div class='text-block'>
         <p class='selected-text'>Name: ${data.name}</p>
         <p class='selected-text'>Owner: ${data.owner.login}</p>
         <p class='selected-text'>Stars: ${data.stargazers_count}</p>
       </div>
-      <button class='selected-delete'></button>
-    </div>`
+    <button class='selected-delete'></button>`
     const div = document.createElement('div')
+    div.classList.add('selected-item')
     div.innerHTML = template
     document.getElementById('selectedList').appendChild(div)
   }
