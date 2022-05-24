@@ -2,6 +2,7 @@ const input = document.getElementById('autocompleteInput')
 const autocompleteList = document.getElementById('autocompleteList')
 const selectedList = document.getElementById('selectedList')
 const selectedItems = selectedList.children
+const autocompleteListItems = autocompleteList.children
 
 class Autocomplete {
   showFirstFiveRepositories(repo){
@@ -70,11 +71,11 @@ function handleInput(e) {
       autocompleteList.innerHTML = '';
       autocomplete.showFirstFiveRepositories(data);
     }
-
+    
     autocompleteList.addEventListener('click', foo = (e) => {
       if (selectedItems.length < 3) {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].name === e.target.innerHTML) {
+        for (let i = 0; i < autocompleteListItems.length; i++) {
+          if (autocompleteListItems[i].textContent === e.target.innerHTML) {
             autocompleteList.innerHTML = '';
             autocomplete.addToSelectedList(data[i])
           }
